@@ -44,11 +44,11 @@ const SignUpScreen = ( ) => {
       <TextInput style={styles.input} placeholder="كلمة المرور" value={password} onChangeText={setPassword} secureTextEntry />
       <TextInput style={styles.input} placeholder="تأكيد كلمة المرور" value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry />
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>إنشاء الحساب</Text>
+        <Text style={styles.buttonText} onPress={() => router.push ('/AppContainer')}>إنشاء الحساب</Text>
       </TouchableOpacity>
       <Text style={styles.loginText}>
         لديك حساب بالفعل؟{' '}
-        <Text style={styles.loginLink} onPress={() => router.back ('/SignInScreen')}>سجل دخولك</Text>
+        <Text style={styles.loginLink} onPress={() => router.replace ('/SignInScreen')}>سجل دخولك</Text>
       </Text>
     </View>
   );

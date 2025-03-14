@@ -1,28 +1,41 @@
 import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import { LinearGradient } from 'expo-linear-gradient'; // Import LinearGradient
 import { useRouter } from 'expo-router';
 
 const { width, height } = Dimensions.get('window');
 
 const IntroScreen = () => {
-  const translateY = useSharedValue(-height / 2);
+  const translateY = useSharedValue(-height / 2); // Shared value for animation
   const router = useRouter();
 
   useEffect(() => {
-    translateY.value = withTiming(0, { duration: 1000 });
+    translateY.value = withTiming(0, { duration: 1000 }); // Animate to 0
   }, []);
 
+  // Animated style for the image and gradient
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateY: translateY.value }],
   }));
 
   return (
     <View style={styles.container}>
-      <Animated.Image
-        source={require('../assets/Splash.jpg')}
-        style={[styles.image, animatedStyle]}
-      />
+      <View style={styles.imageContainer}>
+        {/* Animated Image */}
+        <Animated.Image
+          source={require('../assets/Splash.jpg')}
+          style={[styles.image, animatedStyle]}
+        />
+        {/* Animated Gradient Overlay */}
+        <Animated.View style={[styles.gradientOverlay, animatedStyle]}>
+          <LinearGradient
+            colors={['transparent', '#E0F2F1']}
+            locations={[0.5, 1]} // Adjust the gradient start and end points
+            style={StyleSheet.absoluteFill} // Fill the parent container
+          />
+        </Animated.View>
+      </View>
       <Text style={styles.title}>رايق</Text>
       <Text style={styles.subtitle}>
         العب بذكاء! تابع وقت لعبك، نومك، واكسب شارات رهيبة
@@ -42,16 +55,25 @@ const IntroScreen = () => {
 const styles = StyleSheet.create({
   container: { 
     flex: 1, 
-    // We want the image to stick to the top so align items to stretch
     alignItems: 'stretch', 
     backgroundColor: '#E0F2F1',
     padding: 0,
     margin: 0,
   },
+  imageContainer: {
+    position: 'relative', // Needed for absolute positioning of the gradient
+  },
   image: { 
-    width: '100%',  // image takes the full width of the screen
+    width: '100%', 
     height: height * 0.5, 
-    resizeMode: 'cover',  // ensures the image fills its container on both sides
+    resizeMode: 'cover', 
+  },
+  gradientOverlay: {
+    position: 'absolute', // Position the gradient over the image
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: height * 0.25, // Adjust the height of the gradient
   },
   title: { 
     fontSize: 32, 

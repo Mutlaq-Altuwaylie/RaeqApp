@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import { View, Text, Image, FlatList, StyleSheet } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 const DashboardScreen = () => {
   const healthData = [
@@ -44,13 +44,6 @@ const DashboardScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Image source={require('../assets/profile.png')} style={styles.profileImage} />
-        <Text style={styles.appTitle}>Raeq</Text>
-        <MaterialIcons name="settings" size={24} color="#fff" />
-      </View>
-
       {/* Mental Health Score */}
       <View style={styles.wellnessCard}>
         <Text style={styles.wellnessTitle}>تقييم الصحة النفسية</Text>
@@ -78,29 +71,16 @@ const DashboardScreen = () => {
           </View>
         )}
       />
-
-      {/* Bottom Navigation */}
-      <View style={styles.bottomNav}>
-        <FontAwesome5 name="home" size={24} color="#008080" />
-        <FontAwesome5 name="gamepad" size={24} color="gray" />
-        <FontAwesome5 name="user" size={24} color="gray" />
-      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f5f5f5' },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: '#00c4b4',
-    padding: 20,
-    paddingTop: 40,
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+    paddingTop: 10, // Add some padding to avoid overlap with the header
   },
-  profileImage: { width: 40, height: 40, borderRadius: 20 },
-  appTitle: { color: '#fff', fontSize: 20, fontWeight: 'bold' },
   wellnessCard: {
     backgroundColor: '#fff',
     margin: 15,
@@ -127,15 +107,6 @@ const styles = StyleSheet.create({
   cardSubtitle: { color: '#888', fontSize: 12 },
   cardRole: { color: '#008080', fontSize: 14, fontWeight: 'bold' },
   cardDescription: { color: '#666', fontSize: 12, marginTop: 5 },
-  bottomNav: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    backgroundColor: '#fff',
-    paddingVertical: 15,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    elevation: 5,
-  },
 });
 
 export default DashboardScreen;

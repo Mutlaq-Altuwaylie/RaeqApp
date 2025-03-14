@@ -13,9 +13,9 @@ export default function SignInScreen() {
       <TextInput style={styles.input} placeholder="البريد الإلكتروني" placeholderTextColor="#999" />
       <TextInput style={styles.input} placeholder="كلمة المرور" placeholderTextColor="#999" secureTextEntry />
       <TouchableOpacity>
-        <Text style={styles.forgotPassword}>نسيت كلمة المرور؟</Text>
+        <Text style={styles.forgotPassword} onPress={() => router.push('/PasswordResetScreen')}>نسيت كلمة المرور؟</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => router.push('/DashboardScreen')}>
+      <TouchableOpacity style={styles.button} onPress={() => router.push('/AppContainer')}>
         <Text style={styles.buttonText}>تسجيل الدخول</Text>
       </TouchableOpacity>
       <Text style={styles.registerText} onPress={() => router.push('/SignUpScreen')}>ما عندك حساب؟ <Text style={styles.registerLink}>أنشئ حسابك الآن</Text></Text>
