@@ -18,8 +18,7 @@
       },
       "package": "com.maasmmt.RaeqApp",
       "permissions": [
-        "android.permission.health.READ_SLEEP",
-        "android.permission.health.READ_SLEEP_STAGE"
+        "android.permission.health.READ_SLEEP"
       ]
     },
     "web": {
@@ -29,11 +28,11 @@
     },
     "plugins": [
       [
-        "react-native-health",
+        "expo-health-connect",
         {
           "android": {
-            "compileSdkVersion": 35,
-            "targetSdkVersion": 35,
+            "compileSdkVersion": 34,
+            "targetSdkVersion": 34,
             "minSdkVersion": 26
           }
         }
@@ -49,7 +48,8 @@
           "backgroundColor": "#ffffff"
         }
       ],
-      "expo-router"
+      "expo-router",
+      "react-native-health-connect"
     ],
     "experiments": {
       "typedRoutes": true
