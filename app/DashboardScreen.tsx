@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, FlatList, StyleSheet } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
+import useSleepData from './useSleepData';
 
 const DashboardScreen = () => {
+  const today = new Date();
+  const { sleepData } = useSleepData(today);
+
+  // Update sleep quality description dynamically
+  const sleepDescription =
+    sleepData < 5
+      ? 'نومك أقل من المعدل الطبيعي، حاول تحسين جدولك.'
+      : sleepData < 7
+      ? 'جيد، لكن يمكنك تحسينه بنوم أكثر انتظامًا.'
+      : 'نوم صحي، استمر على هذا النمط!';
+
   const healthData = [
     {
       id: '1',
@@ -17,8 +29,8 @@ const DashboardScreen = () => {
       id: '2',
       title: 'جودة النوم',
       subtitle: 'تحليل نومك',
-      role: 'نمت 4.5 ساعات',
-      description: 'نومك أقل من المعدل الطبيعي، حاول تحسين جدولك.',
+      role: `نمت ${sleepData} ساعات`,
+      description: sleepDescription,
       image: require('../assets/sleep_quality.png'),
       checked: true,
     },
@@ -49,8 +61,9 @@ const DashboardScreen = () => {
         <Text style={styles.wellnessTitle}>تقييم الصحة النفسية</Text>
         <Text style={styles.score}>7.5/10</Text>
         <Text style={styles.wellnessText}>
-          نومك أقل من المعدل الطبيعي. جرب إيقاف الأجهزة قبل النوم بنصف ساعة، 
-          وقلل السهر لتحسين جودة نومك.
+          {sleepData < 5
+            ? 'نومك أقل من المعدل الطبيعي. جرب إيقاف الأجهزة قبل النوم بنصف ساعة، وقلل السهر لتحسين جودة نومك.'
+            : 'نومك يبدو جيدًا، حافظ على جدول منتظم لتحسين صحتك.'}
         </Text>
       </View>
 
@@ -76,31 +89,12 @@ const DashboardScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-    paddingTop: 10, // Add some padding to avoid overlap with the header
-  },
-  wellnessCard: {
-    backgroundColor: '#fff',
-    margin: 15,
-    padding: 15,
-    borderRadius: 10,
-    elevation: 3,
-  },
+  container: { flex: 1, backgroundColor: '#f5f5f5', paddingTop: 10 },
+  wellnessCard: { backgroundColor: '#fff', margin: 15, padding: 15, borderRadius: 10, elevation: 3 },
   wellnessTitle: { fontSize: 18, fontWeight: 'bold', marginBottom: 5 },
   score: { color: '#008080', fontSize: 16, fontWeight: 'bold' },
   wellnessText: { color: '#666', marginTop: 5 },
-  card: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    marginHorizontal: 15,
-    marginBottom: 10,
-    padding: 15,
-    borderRadius: 10,
-    elevation: 2,
-  },
+  card: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', marginHorizontal: 15, marginBottom: 10, padding: 15, borderRadius: 10, elevation: 2 },
   avatar: { width: 50, height: 50, borderRadius: 25, marginRight: 10 },
   cardContent: { flex: 1 },
   cardTitle: { fontSize: 16, fontWeight: 'bold' },
