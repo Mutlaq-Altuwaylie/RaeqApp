@@ -6,24 +6,26 @@
         function getSteamId() {
             const url = new URL(window.location.href);
             const claimedId = url.searchParams.get('openid.claimed_id');
-            return claimedId?.match(/\/openid\/id\/(\d+)/)?.[1];
+            if (!claimedId) return null;
+            
+            // Extract SteamID from format: https://steamcommunity.com/openid/id/7656119...
+            const steamId = claimedId.match(/\/openid\/id\/(\d+)$/)?.[1];
+            return steamId;
         }
 
         function redirectToApp() {
             const steamId = getSteamId();
             if (steamId) {
+                // Pass both SteamID and original return URL for verification
                 window.location.href = `myapp://auth/steam?id=${steamId}`;
             } else {
-                document.getElementById('status').innerText = 
-                    'Authentication failed. Please return to the app.';
+                document.getElementById('status').innerHTML = 
+                    'Authentication failed. <a href="myapp://">Return to app</a>';
             }
         }
     </script>
 </head>
 <body onload="redirectToApp()">
-    <p id="status">Redirecting back to RaeqApp...</p>
-    <noscript>
-        <p>Enable JavaScript to complete authentication.</p>
-    </noscript>
+    <p id="status">Processing Steam login...</p>
 </body>
 </html>
