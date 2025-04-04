@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Steam Auth Redirect</title>
+    <script>
+        function getSteamId() {
+            const url = new URL(window.location.href);
+            const claimedId = url.searchParams.get('openid.claimed_id');
+            return claimedId?.match(/\/openid\/id\/(\d+)/)?.[1];
+        }
+
+        function redirectToApp() {
+            const steamId = getSteamId();
+            if (steamId) {
+                window.location.href = `myapp://auth/steam?id=${steamId}`;
+            } else {
+                document.getElementById('status').innerText = 
+                    'Authentication failed. Please return to the app.';
+            }
+        }
+    </script>
+</head>
+<body onload="redirectToApp()">
+    <p id="status">Redirecting back to RaeqApp...</p>
+    <noscript>
+        <p>Enable JavaScript to complete authentication.</p>
+    </noscript>
+</body>
+</html>
