@@ -8,6 +8,15 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "extra": {
+      "steamApiKey": "E7E87D1E039DE60B9DF4B5900337FF9C",
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "ac2dedf2-7088-4324-8131-91221bdc0ea9"
+      }
+    },
     "ios": {
       "supportsTablet": true
     },
@@ -27,17 +36,18 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      "expo-health-connect",
+      "./androidManifestPlugin.js",
       [
-        "expo-health-connect",
+        "expo-build-properties",
         {
           "android": {
-            "compileSdkVersion": 34,
-            "targetSdkVersion": 34,
+            "compileSdkVersion": 35,
+            "targetSdkVersion": 35,
             "minSdkVersion": 26
           }
         }
       ],
-      
       "expo-secure-store",
       [
         "expo-splash-screen",
