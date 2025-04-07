@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "extra": {
-      "steamApiKey": "E7E87D1E039DE60B9DF4B5900337FF9C",
+      "steamApiKey": "put your steam API here",
       "router": {
         "origin": false
       },
