@@ -12,15 +12,12 @@
             const steamId = claimedId.match(/\/openid\/id\/(\d+)$/)?.[1];
             return steamId;
         }
+
         function redirectToApp() {
             const steamId = getSteamId();
             if (steamId) {
-                // Redirect to SettingsScreen with the SteamID
-                // You can change this to DashboardScreen if preferred
-                window.location.href = `myapp://SettingsScreen?steamId=${steamId}`;
-                
-                // Alternative for DashboardScreen:
-                // window.location.href = `myapp://DashboardScreen?steamId=${steamId}`;
+                // Pass both SteamID and original return URL for verification
+                window.location.href = `myapp://auth/steam?id=${steamId}`;
             } else {
                 document.getElementById('status').innerHTML = 
                     'Authentication failed. <a href="myapp://">Return to app</a>';
